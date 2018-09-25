@@ -91,3 +91,6 @@ class Array:
         int or float
         '''
         return median(self.data)
+
+    def __repr__(self):
+        return 'This is my array'
