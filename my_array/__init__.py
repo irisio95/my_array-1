@@ -41,6 +41,9 @@ class Array:
             else:
                 raise TypeError('List must only contain bool, '
                                 'ints, or floats')
+
+            # if there is mixed data types in the list
+            # such that the first element is integer and the next float                
             try:
                 self.data = array(dtype, data)
             except TypeError:
