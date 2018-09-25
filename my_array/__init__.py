@@ -23,9 +23,15 @@ class Array:
     def __init__(self, data):
         # Allow user to pass only an array or a list
         if isinstance(data, array):
+            # TODO - check for cases where typecode is not 'b', 'q', or 'd'
             self.data = data
         elif isinstance(data, list):
-            first_item = data[0]
+            if len(data) == 0:
+                # hack - forcing array to be a float
+                first_item = 0.0
+            else:
+                first_item = data[0]
+
             if isinstance(first_item, bool):
                 dtype = 'b'
             elif isinstance(first_item, int):
@@ -42,9 +48,9 @@ class Array:
         else:
             raise TypeError('Array constructor only accepts lists or arrays')
         # b - boolean (1 byte integer)
-        # q - interger (4 bytes)
+        # q - interger (8 bytes)
         # d - float (8 bytes)
-
+        self.dtype = self.data.typecode
     def sum(self):
         '''
         Sums all the values in the array
