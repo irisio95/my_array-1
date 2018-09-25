@@ -51,5 +51,3 @@ def test_mixed_data_type_error():
 def test_not_list_or_array_error():
     with pytest.raises(TypeError):
         Array('asdf')
-
-

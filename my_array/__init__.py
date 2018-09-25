@@ -26,21 +26,7 @@ class Array:
             # TODO - check for cases where typecode is not 'b', 'q', or 'd'
             self.data = data
         elif isinstance(data, list):
-            if len(data) == 0:
-                # hack - forcing array to be a float
-                first_item = 0.0
-            else:
-                first_item = data[0]
-
-            if isinstance(first_item, bool):
-                dtype = 'b'
-            elif isinstance(first_item, int):
-                dtype = 'q'
-            elif isinstance(first_item, float):
-                dtype = 'd'
-            else:
-                raise TypeError('List must only contain bool, '
-                                'ints, or floats')
+            dtype = self.get_dtype_of_list(data)
 
             # if there is mixed data types in the list
             # such that the first element is integer and the next float                
@@ -54,6 +40,25 @@ class Array:
         # q - interger (8 bytes)
         # d - float (8 bytes)
         self.dtype = self.data.typecode
+
+    def get_dtype_of_list(self, data):
+        if len(data) == 0:
+            # hack - forcing array to be a float
+            first_item = 0.0
+        else:
+            first_item = data[0]
+
+        if isinstance(first_item, bool):
+            dtype = 'b'
+        elif isinstance(first_item, int):
+            dtype = 'q'
+        elif isinstance(first_item, float):
+            dtype = 'd'
+        else:
+            raise TypeError('List must only contain bool, '
+                            'ints, or floats')
+        return dtype
+
     def sum(self):
         '''
         Sums all the values in the array
