@@ -2,6 +2,8 @@ from statistics import median
 from array import array
 from . import _utils
 
+options_max_values = 20
+
 class Array:
     '''
     This is a single-dimensional numeric
@@ -94,8 +96,17 @@ class Array:
 
     def __repr__(self):
         final_str = ''
-        for val in self.data:
-            final_str += f'{val:5}\n'
+        # TODO: validate against even/odd number
+        half_max = options_max_values // 2
+        if len(self) < options_max_values:
+            for val in self.data:
+                final_str += f'{val:5}\n'
+        else:
+            for val in self.data[:half_max]:
+                final_str += f'{val:5}\n'
+            final_str += '...\n'
+            for val in self.data[-half_max:]:
+                final_str += f'{val:5}\n'
         return final_str
 
     def __len__(self):
@@ -107,3 +118,8 @@ class Array:
 
     def __iter__(self):
         return iter(self.data)
+
+# change repr such that only first and last 10 are output
+# if less than 20, output all
+
+
