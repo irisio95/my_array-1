@@ -80,7 +80,7 @@ class Array:
         -------
         int or float
         '''
-        return self.sum() / len(self.data)
+        return self.sum() / len(self)
 
     def median(self):
         '''
@@ -93,4 +93,17 @@ class Array:
         return median(self.data)
 
     def __repr__(self):
-        return 'This is my array'
+        final_str = ''
+        for val in self.data:
+            final_str += f'{val:5}\n'
+        return final_str
+
+    def __len__(self):
+        return len(self.data)
+    
+    def sort(self, reverse=False):
+        data = sorted(self, reverse=reverse)
+        return Array(data)
+
+    def __iter__(self):
+        return iter(self.data)
